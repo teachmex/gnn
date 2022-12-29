@@ -6,4 +6,4 @@ Table
 
 |A|B|C|
 |:---:|:---:|:---:|
-|afasfd|ASFAFAS|FSFSFS|
+|```(abs```|creayes absolute value|```a = -20, abs(a) =20```|
