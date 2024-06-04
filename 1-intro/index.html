@@ -1,0 +1,900 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../2-types/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.25">
+    
+    
+      
+        <title>Introduction - Graph Neural Networks (GNN)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6543a935.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","UA-156178967-1"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","UA-156178967-1",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=UA-156178967-1",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#what-is-graph-neural-network-gnn" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Graph Neural Networks (GNN)" class="md-header__button md-logo" aria-label="Graph Neural Networks (GNN)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Graph Neural Networks (GNN)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introduction
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Graph Neural Networks (GNN)" class="md-nav__button md-logo" aria-label="Graph Neural Networks (GNN)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Graph Neural Networks (GNN)
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-graph-neural-network-gnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is graph Neural Network (GNN) ?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What is graph Neural Network (GNN) ?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-features-of-graph-neural-networks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Features of Graph Neural Networks:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#differences-from-traditional-neural-networks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Differences from Traditional Neural Networks:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-message-passing-in-the-context-of-gnns-how-is-it-implemented" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is message passing in the context of GNNs? How is it implemented?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What is message passing in the context of GNNs? How is it implemented?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#message-passing-in-graph-neural-networks-gnns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Message Passing in Graph Neural Networks (GNNs)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concept-of-message-passing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concept of Message Passing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation-of-message-passing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation of Message Passing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-implementation-pseudo-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Implementation (Pseudo-Code)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-do-you-represent-nodes-and-edges-as-vectors-in-gnn-what-happens-to-those-vectors-after-the-training-is-completed" class="md-nav__link">
+    <span class="md-ellipsis">
+      How do you represent nodes and edges as vectors in GNN? What happens to those vectors after the training is completed?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#representing-nodes-and-edges-in-graph-neural-networks-gnns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Representing Nodes and Edges in Graph Neural Networks (GNNs)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Representing Nodes and Edges in Graph Neural Networks (GNNs)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#representing-nodes-and-edges" class="md-nav__link">
+    <span class="md-ellipsis">
+      Representing Nodes and Edges
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#training-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      Training Process
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#after-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      After Training
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Types of GNN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-train/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Training GNN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4-embedding/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Embedding GNN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5-kg/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge Graph
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6-research/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Research
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-graph-neural-network-gnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is graph Neural Network (GNN) ?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What is graph Neural Network (GNN) ?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-features-of-graph-neural-networks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Features of Graph Neural Networks:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#differences-from-traditional-neural-networks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Differences from Traditional Neural Networks:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-message-passing-in-the-context-of-gnns-how-is-it-implemented" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is message passing in the context of GNNs? How is it implemented?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What is message passing in the context of GNNs? How is it implemented?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#message-passing-in-graph-neural-networks-gnns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Message Passing in Graph Neural Networks (GNNs)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concept-of-message-passing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concept of Message Passing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation-of-message-passing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation of Message Passing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-implementation-pseudo-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Implementation (Pseudo-Code)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-do-you-represent-nodes-and-edges-as-vectors-in-gnn-what-happens-to-those-vectors-after-the-training-is-completed" class="md-nav__link">
+    <span class="md-ellipsis">
+      How do you represent nodes and edges as vectors in GNN? What happens to those vectors after the training is completed?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#representing-nodes-and-edges-in-graph-neural-networks-gnns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Representing Nodes and Edges in Graph Neural Networks (GNNs)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Representing Nodes and Edges in Graph Neural Networks (GNNs)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#representing-nodes-and-edges" class="md-nav__link">
+    <span class="md-ellipsis">
+      Representing Nodes and Edges
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#training-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      Training Process
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#after-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      After Training
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Introduction</h1>
+
+<hr />
+<h3 id="what-is-graph-neural-network-gnn">What is graph Neural Network (GNN) ?</h3>
+<hr />
+<p>Graph Neural Networks (GNNs) are a type of neural network designed specifically to operate on graph structures. They are powerful tools for dealing with data that represents entities and their relationships, such as social networks, molecular structures, or communication networks.</p>
+<h4 id="key-features-of-graph-neural-networks">Key Features of Graph Neural Networks:</h4>
+<ul>
+<li>
+<p><strong>Graph-Based Input</strong>: Unlike traditional neural networks that expect inputs in the form of vectors (e.g., images, text), GNNs work directly with graphs. These graphs are composed of nodes (vertices) and edges, each potentially having their own attributes.</p>
+</li>
+<li>
+<p><strong>Message Passing</strong>: GNNs use a technique called message passing, where nodes aggregate information from their neighbors. This process involves updating the representation of a node by combining its own features with the features of its adjacent nodes, often using functions like sum, mean, or max. This mechanism allows GNNs to learn the structural information of the graph.</p>
+</li>
+<li>
+<p><strong>Local Connectivity</strong>: In GNNs, the computation for a node’s representation is localized to its neighborhood. This is fundamentally different from architectures like CNNs where filters slide over the entire input space, or RNNs where sequences are processed either entirely or in large segments.</p>
+</li>
+</ul>
+<h4 id="differences-from-traditional-neural-networks">Differences from Traditional Neural Networks:</h4>
+<ul>
+<li>
+<p><strong>Data Structure</strong>: Traditional neural networks usually require fixed-size input and do not natively support irregular data structures like graphs. GNNs, on the other hand, can naturally handle graphs of varying sizes and complexities.</p>
+</li>
+<li>
+<p><strong>Invariance to Permutations</strong>: The output of a GNN is invariant to the permutation of node labels in the input graph. This means that reordering the nodes of the graph does not change the output of the network, which is a desirable property for many graph-based tasks.</p>
+</li>
+<li>
+<p><strong>Relational Reasoning</strong>: GNNs excel at tasks that require reasoning about the relationships and interconnections between entities, making them suitable for tasks like social network analysis, chemical molecule analysis, and recommendation systems, where interactions or relationships are key.</p>
+</li>
+<li>
+<p><strong>Adaptability to Dynamic Data</strong>: GNNs are particularly adept at handling dynamic graphs where the structure may change over time, whereas traditional neural networks would require retraining or significant adjustments.</p>
+</li>
+</ul>
+<p>Overall, GNNs extend the capability of traditional neural networks to a broad range of data types and structures, particularly excelling in domains where data can be naturally represented as graphs. This specialization allows them to capture both node-level and graph-level properties effectively.</p>
+<hr />
+<h3 id="what-is-message-passing-in-the-context-of-gnns-how-is-it-implemented">What is message passing in the context of GNNs? How is it implemented?</h3>
+<hr />
+<h4 id="message-passing-in-graph-neural-networks-gnns">Message Passing in Graph Neural Networks (GNNs)</h4>
+<p>In the context of Graph Neural Networks (GNNs), message passing is a fundamental mechanism through which nodes in a graph exchange information with their neighbors. This process allows GNNs to incorporate local graph structure and node feature information effectively, thereby enabling the network to learn representations of nodes, edges, or entire subgraphs.</p>
+<h4 id="concept-of-message-passing">Concept of Message Passing</h4>
+<p>Message passing in GNNs involves each node receiving "messages" (data in the form of feature vectors) from its neighboring nodes, processing these messages, and then updating its own state (feature vector) based on both its original features and the received messages. This operation is typically performed iteratively across multiple layers or rounds, allowing information to propagate through the network and nodes to capture more extensive neighborhood contexts over time.</p>
+<h4 id="implementation-of-message-passing">Implementation of Message Passing</h4>
+<p>The implementation of message passing in GNNs generally follows these key steps:</p>
+<ol>
+<li><strong>Message Generation</strong></li>
+</ol>
+<p>Each node creates a message based on its current state (features). This message is often just the node's features themselves, potentially transformed by a neural network layer. In some designs, messages can also incorporate edge attributes if available.</p>
+<ol>
+<li><strong>Message Aggregation</strong></li>
+</ol>
+<p>A node collects messages sent by its neighbors. This aggregation is a crucial step as it determines how the information from various neighbors is combined. Common aggregation functions include:</p>
+<ul>
+<li><strong>Sum:</strong> Adds up all the incoming messages, useful for preserving all information but can be sensitive to the number of messages.</li>
+<li><strong>Mean:</strong> Computes the average of the incoming messages, which helps in normalizing the influence of different-sized neighborhoods.</li>
+<li><strong>Max:</strong> Takes the maximum of the incoming messages, useful for capturing the most significant features among the neighbors.</li>
+<li>
+<p><strong>Custom Functions:</strong> Some models use more complex functions, such as those involving attention mechanisms where the contribution of each neighbor is weighted by learned coefficients.</p>
+</li>
+<li>
+<p><strong>Message Integration and State Update</strong></p>
+</li>
+</ul>
+<p>After aggregation, the node integrates the aggregated message with its own current features. This integration typically involves a combination function, which might be as simple as concatenation followed by a neural network layer, or it could involve more complex functions like gated units in recurrent neural networks. The purpose of this step is to update the node's feature representation to reflect both its own features and the information from its neighbors.</p>
+<ol>
+<li><strong>Non-linear Transformation</strong></li>
+</ol>
+<p>The combined information is usually passed through a non-linear activation function like ReLU to introduce non-linearities into the model, which helps in learning complex patterns.</p>
+<ol>
+<li><strong>Layer Stacking</strong></li>
+</ol>
+<p>In practice, the above steps can be stacked in multiple layers. Each layer allows information to propagate further across the graph. For example, in a two-layer GNN, information can flow from a node to its neighbors and then to the neighbors of those neighbors, effectively capturing a two-hop neighborhood.</p>
+<ol>
+<li><strong>Edge Cases and Variations</strong></li>
+</ol>
+<p>In some variations of GNNs, such as those using edge features or different types of relationships (multi-relational graphs), the message generation and aggregation steps might also incorporate edge-specific transformations or multiple aggregation channels for different types of relationships.</p>
+<h4 id="example-implementation-pseudo-code">Example Implementation (Pseudo-Code)</h4>
+<p>Here's a simplified pseudo-code for a basic message passing step in a GNN:</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%;"><span></span><code><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">message_passing</span>(node_features, adjacency_matrix, weight_matrix):
+    <span style="color: #0099FF; font-style: italic"># Message generation (optional transformation)</span>
+    transformed_features <span style="color: #555555">=</span> relu(dot(node_features, weight_matrix))
+
+    <span style="color: #0099FF; font-style: italic"># Message aggregation (mean aggregation)</span>
+    aggregated_messages <span style="color: #555555">=</span> dot(adjacency_matrix, transformed_features) <span style="color: #555555">/</span> <span style="color: #336666">sum</span>(adjacency_matrix, axis<span style="color: #555555">=</span><span style="color: #FF6600">1</span>, keepdims<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>)
+
+    <span style="color: #0099FF; font-style: italic"># State update (integration with own features)</span>
+    updated_features <span style="color: #555555">=</span> relu(aggregated_messages <span style="color: #555555">+</span> node_features)
+
+    <span style="color: #006699; font-weight: bold">return</span> updated_features
+</code></pre></div>
+
+<h4 id="conclusion">Conclusion</h4>
+<p>Message passing is the core mechanism that allows GNNs to leverage the graph structure effectively. It enables these models to adapt to various tasks in node classification, graph classification, and link prediction by learning representations that are inherently shaped by the structure of the data.</p>
+<hr />
+<h3 id="how-do-you-represent-nodes-and-edges-as-vectors-in-gnn-what-happens-to-those-vectors-after-the-training-is-completed">How do you represent nodes and edges as vectors in GNN? What happens to those vectors after the training is completed?</h3>
+<hr />
+<h3 id="representing-nodes-and-edges-in-graph-neural-networks-gnns">Representing Nodes and Edges in Graph Neural Networks (GNNs)</h3>
+<p>In Graph Neural Networks (GNNs), representing nodes and edges as vectors is crucial for processing graph-structured data using neural networks. Here's how nodes and edges are typically represented and what happens to these representations after training.</p>
+<h4 id="representing-nodes-and-edges">Representing Nodes and Edges</h4>
+<p><strong>Node Representation:</strong></p>
+<ul>
+<li>
+<p><strong>Feature Initialization:</strong> Nodes are initially represented by feature vectors. These features could be inherent attributes of the nodes (like user profiles in social networks, molecular features in chemical compounds, or textual attributes in citation networks). If no natural features are available, they might be initialized to one-hot encoded vectors or embeddings learned during training.</p>
+</li>
+<li>
+<p><strong>Embedding Layers:</strong> For more complex models or when starting from categorical data, an embedding layer might be used to convert initial representations into dense vectors of a specified size. These embeddings can be learned during the training process.</p>
+</li>
+</ul>
+<p><strong>Edge Representation:</strong></p>
+<ul>
+<li>
+<p><strong>Attribute Vectors:</strong> If edges have attributes (like types, strengths, or other properties), these attributes can be encoded as vectors. Similar to nodes, these can be either raw feature vectors or learned embeddings.</p>
+</li>
+<li>
+<p><strong>Use in Models:</strong> In GNNs that explicitly model edge information (like Graph Attention Networks), edge vectors can influence the aggregation step by weighting or transforming the messages passed between nodes based on the edge attributes.</p>
+</li>
+</ul>
+<h4 id="training-process">Training Process</h4>
+<p>During training, the representations of nodes and edges are refined and adjusted based on the learning task (e.g., node classification, link prediction, or graph classification). Training involves optimizing a loss function that measures the error between the predictions made by the GNN and the ground truth labels or values. Here's how the process typically unfolds:</p>
+<ul>
+<li>
+<p><strong>Message Passing and Aggregation:</strong> Each node updates its representation by aggregating transformed features of its neighboring nodes (and possibly edges). This might involve simple operations like summing or averaging, or more complex mechanisms like attention where edge vectors can play a role.</p>
+</li>
+<li>
+<p><strong>Layer-wise Processing:</strong> Many GNNs use multiple layers, where each layer's output serves as the input to the next. With each layer, a node's features can encapsulate information from further in the graph (i.e., nodes further away in the network).</p>
+</li>
+<li>
+<p><strong>Backpropagation:</strong> Like other neural networks, GNNs use backpropagation to update the weights of the network, including any node or edge embeddings that are part of the model parameters. The gradients of the loss function are propagated back through the network to adjust these parameters.</p>
+</li>
+</ul>
+<h4 id="after-training">After Training</h4>
+<p>Once training is completed, the node and edge vectors (embeddings) embody the learned information necessary to perform the specified tasks. Here's what happens to these vectors:</p>
+<ul>
+<li>
+<p><strong>Inference:</strong> The learned node and edge vectors can be used for inference on similar but unseen data. For instance, in a node classification task, the model can predict the labels of new nodes based on their features and their position within the graph structure.</p>
+</li>
+<li>
+<p><strong>Transfer Learning:</strong> The embeddings learned by a GNN can be used as feature inputs for other machine learning models. For instance, node embeddings could be used in traditional classifiers, clustering algorithms, or other prediction tasks not originally part of the training setup.</p>
+</li>
+<li>
+<p><strong>Analysis and Visualization:</strong> Learned embeddings can be analyzed to understand the structure of the graph, the relationship between nodes, or the importance of various features. They can also be visualized using techniques like t-SNE or PCA to explore how nodes are clustered or segregated.</p>
+</li>
+</ul>
+<p>In summary, representing nodes and edges as vectors in GNNs allows these networks to efficiently process and learn from graph-structured data, transforming raw data attributes into powerful embeddings that capture the underlying patterns of the graph. These embeddings become valuable assets for a range of applications and analyses post-training.</p>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.081f42fc.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      
+    
+  </body>
+</html>
