@@ -1,8 +1,7 @@
-# medium
-Medium artifacts
+# Graph Neural Netwoek
 
 
-Table
+### Table Example
 
 |Function|Detail|Example|
 |:---:|:---:|:---:|
