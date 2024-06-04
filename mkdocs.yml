@@ -1,0 +1,54 @@
+
+site_name: Graph Neural Networks (GNN)
+
+
+extra_javascript: 
+    - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+
+markdown_extensions:
+    - mdx_math
+    
+
+
+theme:
+  name: 'material'
+  highlightjs: true
+  hljs_languages: [python]
+  include_homepage_in_sidebar: true
+  prev_next_buttons_location: bottom
+  navigation_depth: 4
+  titles_only: false
+  sticky_navigation: true
+  collapse_navigation: true
+ 
+
+  
+  
+markdown_extensions:
+  - codehilite:
+      linenums: false
+      guess_lang: false
+      use_pygments: true
+      noclasses: true
+      pygments_style: manni
+
+extra:
+  analytics:
+    provider: google
+    property: UA-156178967-1
+      
+
+
+nav:
+- Home: index.md
+- Introduction : 1-intro.md
+- Types of GNN : 2-types.md
+- Training GNN : 3-train.md
+- Embedding GNN : 4-embedding.md
+- Knowledge Graph: 5-kg.md
+- Research: 6-research.md
+
+ 
+ 
+ 
+ 
